@@ -28,7 +28,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 🔐 Load Gemini API Key from Streamlit Secrets
-api_key = os.getenv("AIzaSyCcQ-QGn2rb5WAQeUNluNUP9YGUMjdz5GY")
+api_key = os.getenv("AIzaSyBLX4z7jttqwBoo8AnNudqlzyb2gR5ifS0")
 
 if not api_key:
     st.error("API key not found. Please set GEMINI_API_KEY in your environment or Streamlit secrets.")
