@@ -1,11 +1,13 @@
+
 import streamlit as st
+import os
 import google.generativeai as genai
 from google.generativeai import GenerativeModel
 
-# Page config
+# 🌸 Streamlit Page Config
 st.set_page_config(page_title="From Me to You 💕", page_icon="💬", layout="centered")
 
-# Cute styling
+# 🌈 Cute Styling
 st.markdown("""
     <style>
     body {
@@ -25,18 +27,23 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Gemini API Key
-genai.configure(api_key="AIzaSyCcQ-QGn2rb5WAQeUNluNUP9YGUMjdz5GY")
+# 🔐 Load Gemini API Key from Streamlit Secrets
+api_key = os.getenv("AIzaSyCcQ-QGn2rb5WAQeUNluNUP9YGUMjdz5GY")
 
-# Initialize model
+if not api_key:
+    st.error("API key not found. Please set GEMINI_API_KEY in your environment or Streamlit secrets.")
+    st.stop()
+
+# 🤖 Configure Gemini
+genai.configure(api_key=api_key)
 model = GenerativeModel("gemini-pro")
 chat = model.start_chat(history=[])
 
-# Title
+# 🧡 App Title
 st.title("💬 From Me to You")
 st.write("Hey love, it’s me... your favorite human. Type anything here — I’m always listening. 💗")
 
-# Input box
+# 💬 Chat Input
 user_input = st.text_input("Type here, baby...")
 
 if st.button("Send 💌"):
@@ -55,4 +62,3 @@ if st.button("Send 💌"):
         st.markdown(f"**You:** {response.text}")
     else:
         st.warning("Type something, babe!")
-
